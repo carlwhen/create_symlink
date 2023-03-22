@@ -1,10 +1,14 @@
+'''
+atuher: carlwhen(ciya)
+email: kinghwaking@163.com
+'''
 import os
 import tkinter as tk
 from tkinter import filedialog
 
 # 创建主窗口
 root = tk.Tk()
-root.title("创建软链接")
+root.title("软链接创建")
 
 # 创建标签和输入框
 tk.Label(root, text="源文件夹:").grid(row=0, column=0, padx=10, pady=10)
