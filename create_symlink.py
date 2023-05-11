@@ -19,8 +19,9 @@ tk.Label(root, text="目标文件夹:").grid(row=1, column=0, padx=10, pady=10)
 folder2_entry = tk.Entry(root, width=50)
 folder2_entry.grid(row=1, column=1, padx=10, pady=10)
 
-# 定义文件夹选择函数
+
 def select_folder(entry):
+    # 定义文件夹选择函数
     folder = filedialog.askdirectory()
     entry.delete(0, tk.END)
     entry.insert(0, folder)
@@ -30,8 +31,9 @@ def select_folder(entry):
 tk.Button(root, text="选择文件夹", command=lambda: select_folder(folder1_entry)).grid(row=0, column=2, padx=10, pady=10)
 tk.Button(root, text="选择文件夹", command=lambda: select_folder(folder2_entry)).grid(row=1, column=2, padx=10, pady=10)
 
-# 创建创建软链接按钮
+
 def create_symlink():
+    # 创建创建软链接按钮
     try:
         src = folder1_entry.get()
         dest = folder2_entry.get()
@@ -43,8 +45,8 @@ def create_symlink():
         result_label.config(text=e, fg="red")
         raise e
 
-tk.Button(root, text="创建软链接", command=create_symlink).grid(row=2, column=1, padx=10, pady=10)
 
+tk.Button(root, text="创建软链接", command=create_symlink).grid(row=2, column=1, padx=10, pady=10)
 # 创建结果标签
 result_label = tk.Label(root, text="", font=("Arial", 12))
 result_label.grid(row=3, column=1, padx=10, pady=10)
