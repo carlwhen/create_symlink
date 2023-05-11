@@ -32,11 +32,11 @@ tk.Button(root, text="选择文件夹", command=lambda: select_folder(folder2_en
 
 # 创建创建软链接按钮
 def create_symlink():
-    src = folder1_entry.get()
-    dest = folder2_entry.get()
-    A = os.basename(src)
-    _dest = os.path.join(dest, A)
     try:
+        src = folder1_entry.get()
+        dest = folder2_entry.get()
+        A = os.path.basename(src)
+        _dest = os.path.join(dest, A)
         os.symlink(src, _dest)
         result_label.config(text="软链接创建成功！", fg="green")
     except Exception as e:
