@@ -35,26 +35,10 @@ def create_symlink():
     src = folder1_entry.get()
     dest = folder2_entry.get()
     A = os.basename(src)
-    B = os.basename(dest)
     _dest = os.path.join(dest, A)
     try:
-        # 当文件夹名称不相同，直接新建软连接
-        if A != B:
-            os.symlink(src, _dest)
-            result_label.config(text="软链接创建成功！", fg="green")
-        elif not os.path.exists(src):
-            pass
-        elif not os.path.exists(dest):
-            pass
-        # 当文件夹名称相同，目标文件夹非空，直接创建软连接
-        elif os.listdir(dest):
-            os.symlink(src, _dest)
-            result_label.config(text="软链接创建成功！", fg="green")
-        # 当文件夹名称相同，目标文件夹为空，在该文件夹目录新建软连接
-        else:
-            os.rmdir(dest)
-            os.symlink(src, dest)
-            result_label.config(text="软链接创建成功！", fg="green")
+        os.symlink(src, _dest)
+        result_label.config(text="软链接创建成功！", fg="green")
     except Exception as e:
         result_label.config(text=e, fg="red")
         raise e
