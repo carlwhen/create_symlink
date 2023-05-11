@@ -34,17 +34,27 @@ tk.Button(root, text="选择文件夹", command=lambda: select_folder(folder2_en
 def create_symlink():
     src = folder1_entry.get()
     dest = folder2_entry.get()
+    A = os.basename(src)
+    B = os.basename(dest)
+    _dest = os.path.join(dest, A)
     try:
-        if os.path.exists(src):
-            if os.path.exists(dest):
-                if os.listdir(dest):
-                    result_label.config(text="目标文件夹存非空", fg="red")
-                else:
-                    os.rmdir(dest)
+        # 当文件夹名称不相同，直接新建软连接
+        if A != B:
+            os.symlink(src, _dest)
+            result_label.config(text="软链接创建成功！", fg="green")
+        elif not os.path.exists(src):
+            pass
+        elif not os.path.exists(dest):
+            pass
+        # 当文件夹名称相同，目标文件夹非空，直接创建软连接
+        elif os.listdir(dest):
+            os.symlink(src, _dest)
+            result_label.config(text="软链接创建成功！", fg="green")
+        # 当文件夹名称相同，目标文件夹为空，在该文件夹目录新建软连接
+        else:
+            os.rmdir(dest)
             os.symlink(src, dest)
             result_label.config(text="软链接创建成功！", fg="green")
-        else:
-            result_label.config(text="输入的文件夹路径不存在，请重新输入。", fg="red")
     except Exception as e:
         result_label.config(text=e, fg="red")
         raise e
